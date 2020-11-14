@@ -38,6 +38,20 @@ and performance, scalability, and security built-in by default.
 
 # How to use this image
 
+To run `gatsby new`:
+
+```console
+docker run --rm -v $(pwd -W):/workspace futureys/gatsby gatsby new <site-name> [<starter-url>]
+```
+
+Ex:
+
+```console
+docker run --rm -v $(pwd -W):/workspace futureys/gatsby gatsby new hello-world-gatsby  https://github.com/gatsbyjs/gatsby-starter-hello-world
+```
+
+To start development, see [via docker-compose](#-via-docker-compose).
+
 ## ... via docker-compose
 
 1\.
@@ -100,7 +114,7 @@ Requirement:
 
 - Install [Remote Development extension pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack)
 
-At first, follow the steps 1. to 3. of [via docker-compose](#...-via-docker-compose).
+At first, follow the steps 1. to 3. of [via docker-compose](#-via-docker-compose).
 
 4\.
 
