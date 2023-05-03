@@ -3,7 +3,7 @@
 # see: https://www.stoutlabs.com/blog/2019-02-05-my-docker-setup-gatsby-next/
 # And following official image is legacy
 # see: https://hub.docker.com/r/gatsbyjs/gatsby-dev-builds
-FROM node:alpine
+FROM node:14.14.0-alpine3.12
 
 RUN apk add --no-cache \
 # git: gatsby new command depends on git
@@ -13,7 +13,7 @@ RUN apk add --no-cache \
     util-linux openssl sudo \
 # node-sess version 4 uses g++ and still requires python2
 # see: https://github.com/sass/node-sass/issues/2877
-    python g++ \
+    python2 g++ \
 # gatsby-plugin-sharp depends on imagemin-mozjpeg,
 # imagemin-mozjpeg depends on mozjpeg,
 # mozjpeg requires compiling from source with autoreconf, automake, libtool, gcc, make, musl-dev, file, pkgconfig, nasm
@@ -39,7 +39,7 @@ EXPOSE 8000 9000
 # We introduce yarn since it's still faster and isn't found any defintive defects.
 # In Gatsby development, gatsby-cli is required.
 # When install gatsby-cli in global, we can omit it in package.json.
-RUN yarn global add gatsby-cli && yarn cache clean
+RUN yarn global add gatsby-cli@2.12.117 && yarn cache clean
 
 WORKDIR /workspace
 CMD ["gatsby", "develop", "-H", "0.0.0.0" ]
