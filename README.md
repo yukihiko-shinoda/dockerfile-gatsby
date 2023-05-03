@@ -1,7 +1,6 @@
 <!-- markdownlint-disable first-line-h1 -->
-[![docker build automated?](https://img.shields.io/docker/cloud/automated/futureys/gatsby.svg)](https://hub.docker.com/r/futureys/gatsby/builds)
-[![docker build passing?](https://img.shields.io/docker/cloud/build/futureys/gatsby.svg)](https://hub.docker.com/r/futureys/gatsby/builds)
-[![image size and number of layers](https://images.microbadger.com/badges/image/futureys/gatsby.svg)](https://hub.docker.com/r/futureys/gatsby/dockerfile)
+[![Test](https://github.com/yukihiko-shinoda/dockerfile-gatsby/actions/workflows/test.yml/badge.svg)](https://github.com/yukihiko-shinoda/dockerfile-gatsby/actions/workflows/test.yml)
+[![Docker Image Size (latest semver)](https://img.shields.io/docker/image-size/futureys/gatsby?sort=semver)](https://hub.docker.com/r/futureys/gatsby/dockerfile)
 
 # Quick reference
 
@@ -70,7 +69,7 @@ COPY . .
 Add `docker-compose.yml` in your project to define run parameters:
 
 ```yaml
-version: "3.8"
+version: "3.9"
 services:
   web:
     build:
