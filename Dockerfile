@@ -3,7 +3,7 @@
 # see: https://www.stoutlabs.com/blog/2019-02-05-my-docker-setup-gatsby-next/
 # And following official image is legacy
 # see: https://hub.docker.com/r/gatsbyjs/gatsby-dev-builds
-FROM node:14.14.0-alpine3.12
+FROM node:18.12.1-alpine3.15
 
 RUN apk add --no-cache \
 # git: gatsby new command depends on git
@@ -13,7 +13,10 @@ RUN apk add --no-cache \
     util-linux openssl sudo \
 # node-sess version 4 uses g++ and still requires python2
 # see: https://github.com/sass/node-sass/issues/2877
-    python2 g++ \
+# Node-gyp v9.1.0 requires Python3.6.0 or more:
+#   #0 58.43 gyp ERR! find Python - version is 2.7.18 - should be >=3.6.0
+#   #0 58.43 gyp ERR! find Python - THIS VERSION OF PYTHON IS NOT SUPPORTED
+    python2 python3 g++ \
 # gatsby-plugin-sharp depends on imagemin-mozjpeg,
 # imagemin-mozjpeg depends on mozjpeg,
 # mozjpeg requires compiling from source with autoreconf, automake, libtool, gcc, make, musl-dev, file, pkgconfig, nasm
@@ -27,7 +30,9 @@ RUN apk add --no-cache \
     autoconf automake libtool gcc make musl-dev file pkgconfig nasm \
 # sharp depends on vips
 # see: https://github.com/lovell/sharp/issues/773
-    vips \
+# Can't resolve without vips-dev:
+#   #0 64.81 ../src/common.cc:24:10: fatal error: vips/vips8: No such file or directory
+    vips vips-dev \
  && rm -fR /var/cache/apk/*
 
 # Also exposing VSCode debug ports
