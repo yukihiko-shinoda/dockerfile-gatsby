@@ -44,7 +44,7 @@ EXPOSE 8000 9000
 # We introduce yarn since it's still faster and isn't found any defintive defects.
 # In Gatsby development, gatsby-cli is required.
 # When install gatsby-cli in global, we can omit it in package.json.
-RUN yarn global add gatsby-cli@2.12.117 && yarn cache clean
+RUN yarn global add gatsby-cli@4.25.0 && yarn cache clean
 
 WORKDIR /workspace
 CMD ["gatsby", "develop", "-H", "0.0.0.0" ]
