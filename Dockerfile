@@ -11,12 +11,10 @@ RUN apk add --no-cache \
 # util-linux: gatsby develop calls lscpu
 # openssl, sudo: gatsby develop --https uses
     util-linux openssl sudo \
-# node-sess version 4 uses g++ and still requires python2
-# see: https://github.com/sass/node-sass/issues/2877
 # Node-gyp v9.1.0 requires Python3.6.0 or more:
 #   #0 58.43 gyp ERR! find Python - version is 2.7.18 - should be >=3.6.0
 #   #0 58.43 gyp ERR! find Python - THIS VERSION OF PYTHON IS NOT SUPPORTED
-    python2 python3 g++ \
+    python3 g++ \
 # gatsby-plugin-sharp depends on imagemin-mozjpeg,
 # imagemin-mozjpeg depends on mozjpeg,
 # mozjpeg requires compiling from source with autoreconf, automake, libtool, gcc, make, musl-dev, file, pkgconfig, nasm
