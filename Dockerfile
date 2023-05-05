@@ -3,7 +3,7 @@
 # see: https://www.stoutlabs.com/blog/2019-02-05-my-docker-setup-gatsby-next/
 # And following official image is legacy
 # see: https://hub.docker.com/r/gatsbyjs/gatsby-dev-builds
-FROM node:18.12.1-alpine3.15
+FROM node:20.1.0-alpine3.17
 
 RUN apk add --no-cache \
 # git: gatsby new command depends on git
