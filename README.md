@@ -97,7 +97,7 @@ services:
 
 3\.
 
-Update scripts `develop` and `serve` in `pacage.json` to make it accessible from outside the container:
+Update scripts `develop` and `serve` in `package.json` to make it accessible from outside the container:
 
 ```Diff
 -    "develop": "gatsby develop",
