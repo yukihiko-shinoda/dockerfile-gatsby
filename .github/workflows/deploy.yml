@@ -14,11 +14,9 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
       - id: extract-tag
-        run: echo ::set-output name=DOCKER_TAG::$(echo ${GITHUB_REF#refs/tags/v})
-      - uses: docker/build-push-action@v5
+        run: echo "DOCKER_TAG=$(echo ${GITHUB_REF#refs/tags/v})" >> $GITHUB_ENV
+      - uses: docker/bake-action@v6
         with:
           push: true
           builder: ${{ steps.buildx.outputs.name }}
-          cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/gatsby:buildcache
-          cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/gatsby:buildcache,mode=max
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/gatsby:latest,${{ secrets.DOCKER_HUB_USERNAME }}/gatsby:${{ steps.extract-tag.outputs.DOCKER_TAG }}
+          targets: app-release

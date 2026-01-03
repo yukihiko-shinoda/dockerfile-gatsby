@@ -17,12 +17,17 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
-      - uses: docker/build-push-action@v5
+      - uses: docker/bake-action@v6
+        with:
+          builder: ${{ steps.buildx.outputs.name }}
+          targets: app-release
+        env:
+          DOCKER_TAG: test
+      - uses: docker/bake-action@v6
         with:
           load: true
           builder: ${{ steps.buildx.outputs.name }}
-          cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/gatsby:buildcache
-          cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/gatsby:buildcache,mode=max
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/gatsby:test
+        env:
+          DOCKER_TAG: test
       - uses: actions/checkout@v6
       - run: docker compose run --rm gatsby
