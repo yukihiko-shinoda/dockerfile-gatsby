@@ -3,25 +3,25 @@
 # see: https://www.stoutlabs.com/blog/2019-02-05-my-docker-setup-gatsby-next/
 # And following official image is legacy
 # see: https://hub.docker.com/r/gatsbyjs/gatsby-dev-builds
-FROM node:21.4.0-alpine3.18
+FROM node:21.4.0-alpine3.19
 
 # - DL3018 is reported when locking apk packageversion by `~` (tilde) · Issue #1165 · hadolint/hadolint
 #   https://github.com/hadolint/hadolint/issues/1165
 # hadolint ignore=DL3018
 RUN apk add --no-cache \
     # gatsby new command depends on git
-    git~2.40.4 \
+    git~2.43.7 \
     # gatsby develop calls lscpu
-    util-linux~2.38.1 \
+    util-linux~2.39.3 \
     # gatsby develop --https uses
     openssl~3.1.8 \
     # gatsby develop --https uses
-    sudo~1.9.13_p3 \
+    sudo~1.9.15_p2 \
     # Node-gyp v9.1.0 requires Python3.6.0 or more:
     #   #0 58.43 gyp ERR! find Python - version is 2.7.18 - should be >=3.6.0
     #   #0 58.43 gyp ERR! find Python - THIS VERSION OF PYTHON IS NOT SUPPORTED
-    python3~3.11.12 \
-    g++~12.2.1_git20220924 \
+    python3~3.11.14 \
+    g++~13.2.1_git20231014 \
     # gatsby-plugin-sharp depends on imagemin-mozjpeg,
     # imagemin-mozjpeg depends on mozjpeg,
     # mozjpeg requires compiling from source with autoreconf, automake, libtool, gcc, make, musl-dev, file, pkgconfig, nasm
@@ -36,7 +36,7 @@ RUN apk add --no-cache \
     libtool~2.4.7 \
     # - Answer: macos - No acceptable C compiler found in $PATH - Stack Overflow
     #   https://stackoverflow.com/a/57419374/12721873
-    gcc~12.2.1_git20220924 \
+    gcc~13.2.1_git20231014 \
     make~4.4.1 \
     musl-dev~1.2.4 \
     # - Package index - Alpine Linux packages
@@ -51,10 +51,10 @@ RUN apk add --no-cache \
     # sharp depends on vips
     # - Error loading shared library libvips-cpp.so.42: No such file or directory · Issue #773 · lovell/sharp
     #   https://github.com/lovell/sharp/issues/773
-    vips~8.14.3 \
+    vips~8.15.0 \
     # Can't resolve without vips-dev:
     #   #0 64.81 ../src/common.cc:24:10: fatal error: vips/vips8: No such file or directory
-    vips-dev~8.14.3 \
+    vips-dev~8.15.0 \
  && rm -fR /var/cache/apk/*
 
 # Also exposing VSCode debug ports
