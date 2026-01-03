@@ -10,7 +10,7 @@
 
 - **Where to file issues**: [https://github.com/yukihiko-shinoda/dockerfile-gatsby/issues](https://github.com/yukihiko-shinoda/dockerfile-gatsby/issues)
 
-- **Image updates**: [Dockerfile](https://github.com/yukihiko-shinoda/dockerfile-gatsby/blob/master/Dockerfile)
+- **Image updates**: [Dockerfile](https://github.com/yukihiko-shinoda/dockerfile-gatsby/blob/main/Dockerfile)
 
 - **Source of this description**: [docs repo's root directory](https://github.com/yukihiko-shinoda/dockerfile-gatsby)
 

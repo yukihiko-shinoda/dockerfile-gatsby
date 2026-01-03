@@ -2,10 +2,10 @@ name: Test
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -24,5 +24,5 @@ jobs:
           cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/gatsby:buildcache
           cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/gatsby:buildcache,mode=max
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/gatsby:test
-      - uses: actions/checkout@v4
-      - run: docker-compose -f docker-compose.test.yml run --rm sut
+      - uses: actions/checkout@v6
+      - run: docker compose run --rm gatsby
