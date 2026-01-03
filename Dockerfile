@@ -3,7 +3,7 @@
 # see: https://www.stoutlabs.com/blog/2019-02-05-my-docker-setup-gatsby-next/
 # And following official image is legacy
 # see: https://hub.docker.com/r/gatsbyjs/gatsby-dev-builds
-FROM node:22.13.1-alpine3.21
+FROM node:25.2.1-alpine3.21
 
 # - DL3018 is reported when locking apk packageversion by `~` (tilde) · Issue #1165 · hadolint/hadolint
 #   https://github.com/hadolint/hadolint/issues/1165
