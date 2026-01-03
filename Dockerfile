@@ -5,32 +5,56 @@
 # see: https://hub.docker.com/r/gatsbyjs/gatsby-dev-builds
 FROM node:21.4.0-alpine3.17
 
+# - DL3018 is reported when locking apk packageversion by `~` (tilde) · Issue #1165 · hadolint/hadolint
+#   https://github.com/hadolint/hadolint/issues/1165
+# hadolint ignore=DL3018
 RUN apk add --no-cache \
-# git: gatsby new command depends on git
-    git \
-# util-linux: gatsby develop calls lscpu
-# openssl, sudo: gatsby develop --https uses
-    util-linux openssl sudo \
-# Node-gyp v9.1.0 requires Python3.6.0 or more:
-#   #0 58.43 gyp ERR! find Python - version is 2.7.18 - should be >=3.6.0
-#   #0 58.43 gyp ERR! find Python - THIS VERSION OF PYTHON IS NOT SUPPORTED
-    python3 g++ \
-# gatsby-plugin-sharp depends on imagemin-mozjpeg,
-# imagemin-mozjpeg depends on mozjpeg,
-# mozjpeg requires compiling from source with autoreconf, automake, libtool, gcc, make, musl-dev, file, pkgconfig, nasm
-# see: https://pkgs.alpinelinux.org/contents?page=1&file=autoreconf
-# see: https://github.com/buffer/pylibemu/issues/24#issuecomment-492759639
-# see: https://github.com/maxmind/libmaxminddb/issues/9#issuecomment-30836272
-# see: https://stackoverflow.com/questions/28631817/no-acceptable-c-compiler-found-in-path/57419374#57419374
-# see: https://pkgs.alpinelinux.org/contents?branch=v3.3&name=file&arch=x86&repo=main
-# see: https://stackoverflow.com/questions/17089858/pkg-config-pkg-prog-pkg-config-command-not-found/17106579#17106579
-# see: https://github.com/alicevision/AliceVision/issues/593#issuecomment-457194176
-    autoconf automake libtool gcc make musl-dev file pkgconfig nasm \
-# sharp depends on vips
-# see: https://github.com/lovell/sharp/issues/773
-# Can't resolve without vips-dev:
-#   #0 64.81 ../src/common.cc:24:10: fatal error: vips/vips8: No such file or directory
-    vips vips-dev \
+    # gatsby new command depends on git
+    git~2.39.5 \
+    # gatsby develop calls lscpu
+    util-linux~2.38.1 \
+    # gatsby develop --https uses
+    openssl~3.0.15 \
+    # gatsby develop --https uses
+    sudo~1.9.12_p2 \
+    # Node-gyp v9.1.0 requires Python3.6.0 or more:
+    #   #0 58.43 gyp ERR! find Python - version is 2.7.18 - should be >=3.6.0
+    #   #0 58.43 gyp ERR! find Python - THIS VERSION OF PYTHON IS NOT SUPPORTED
+    python3~3.10.15 \
+    g++~12.2.1_git20220924 \
+    # gatsby-plugin-sharp depends on imagemin-mozjpeg,
+    # imagemin-mozjpeg depends on mozjpeg,
+    # mozjpeg requires compiling from source with autoreconf, automake, libtool, gcc, make, musl-dev, file, pkgconfig, nasm
+    # - Package index - Alpine Linux packages
+    #   https://pkgs.alpinelinux.org/contents?page=1&file=autoreconf
+    autoconf~2.71 \
+    # - Error with install: autoreconf fails to run aclocal · Issue #24 · buffer/pylibemu
+    #   https://github.com/buffer/pylibemu/issues/24#issuecomment-492759639
+    automake~1.16.5 \
+    # - undefined macro: AC_PROG_LIBTOOL · Issue #9 · maxmind/libmaxminddb
+    #   https://github.com/maxmind/libmaxminddb/issues/9#issuecomment-30836272
+    libtool~2.4.7 \
+    # - Answer: macos - No acceptable C compiler found in $PATH - Stack Overflow
+    #   https://stackoverflow.com/a/57419374/12721873
+    gcc~12.2.1_git20220924 \
+    make~4.3 \
+    musl-dev~1.2.3 \
+    # - Package index - Alpine Linux packages
+    #   https://pkgs.alpinelinux.org/contents?file=file&path=&name=&branch=v3.15&repo=main&arch=x86
+    file~5.43 \
+    # - Answer: macos - pkg-config: PKG_PROG_PKG_CONFIG: command not found - Stack Overflow
+    #   https://stackoverflow.com/a/17106579/12721873
+    pkgconfig~1.9.4 \
+    # - Build error: no nasm (Netwide Assembler) found · Issue #593 · alicevision/AliceVision
+    #   https://github.com/alicevision/AliceVision/issues/593#issuecomment-457194176
+    nasm~2.15.05 \
+    # sharp depends on vips
+    # - Error loading shared library libvips-cpp.so.42: No such file or directory · Issue #773 · lovell/sharp
+    #   https://github.com/lovell/sharp/issues/773
+    vips~8.13.3 \
+    # Can't resolve without vips-dev:
+    #   #0 64.81 ../src/common.cc:24:10: fatal error: vips/vips8: No such file or directory
+    vips-dev~8.13.3 \
  && rm -fR /var/cache/apk/*
 
 # Also exposing VSCode debug ports
