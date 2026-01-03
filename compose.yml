@@ -4,4 +4,4 @@ services:
     command:
       - gatsby
       - --version
-    image: futureys/gatsby:latest
+    image: futureys/gatsby:development
