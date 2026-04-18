@@ -14,13 +14,13 @@ RUN apk add --no-cache \
     # gatsby develop calls lscpu
     util-linux~2.40.4 \
     # gatsby develop --https uses
-    openssl~3.3.5 \
+    openssl~3.3.7 \
     # gatsby develop --https uses
     sudo~1.9.17_p1 \
     # Node-gyp v9.1.0 requires Python3.6.0 or more:
     #   #0 58.43 gyp ERR! find Python - version is 2.7.18 - should be >=3.6.0
     #   #0 58.43 gyp ERR! find Python - THIS VERSION OF PYTHON IS NOT SUPPORTED
-    python3~3.12.12 \
+    python3~3.12.13 \
     g++~14.2.0 \
     # gatsby-plugin-sharp depends on imagemin-mozjpeg,
     # imagemin-mozjpeg depends on mozjpeg,

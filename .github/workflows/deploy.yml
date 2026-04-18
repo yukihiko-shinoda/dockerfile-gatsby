@@ -15,7 +15,7 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
       - id: extract-tag
         run: echo "DOCKER_TAG=$(echo ${GITHUB_REF#refs/tags/v})" >> $GITHUB_ENV
-      - uses: docker/bake-action@v6
+      - uses: docker/bake-action@v7
         with:
           push: true
           builder: ${{ steps.buildx.outputs.name }}
