@@ -29,5 +29,5 @@ jobs:
           builder: ${{ steps.buildx.outputs.name }}
         env:
           DOCKER_TAG: test
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - run: docker compose run --rm gatsby
